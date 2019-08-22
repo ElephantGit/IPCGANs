@@ -16,7 +16,8 @@ class ImageDataGenerator:
         # Init params
         self.root_folder = '/new_disk2/wangzw/tangxu/CACD_cropped_400/'
         if mode == 'train':
-            self.file_folder = '/new_disk2/wangzw/tangxu/age_data/train_data/'
+            # self.file_folder = '/new_disk2/wangzw/tangxu/age_data/train_data/'
+            self.file_folder = 'images/train'
             self.class_lists = ['train_age_group_0.txt',
                                'train_age_group_1.txt',
                                'train_age_group_2.txt',
@@ -24,7 +25,8 @@ class ImageDataGenerator:
                                'train_age_group_4.txt']
             self.pointer = [0, 0, 0, 0, 0]
         else:
-            self.file_folder = '/new_disk2/wangzw/tangxu/age_data/test_data/'
+            # self.file_folder = '/new_disk2/wangzw/tangxu/age_data/test_data/'
+            self.file_folder = 'images/test'
             self.class_lists = ['test_age_group_0.txt',
                                'test_age_group_1.txt',
                                'test_age_group_2.txt',
@@ -32,8 +34,9 @@ class ImageDataGenerator:
                                'test_age_group_4.txt']
             self.pointer = [0, 0, 0, 0, 0, 0]
 
-        self.train_label_pair = '/home/wangzw/Face-Aging-with-Identity-Preserved-Conditional-Generative-Adversarial-Networks-master/tools' \
+        # self.train_label_pair = '/home/wangzw/Face-Aging-with-Identity-Preserved-Conditional-Generative-Adversarial-Networks-master/tools' \
                                 '/train_label_pair.txt'
+        self.train_label_pair = 'tools/train_label_pair.txt'
         self.true_labels = []
         self.false_labels = []
         self.images = []
@@ -51,7 +54,7 @@ class ImageDataGenerator:
         self.z_dim = z_dim
         self.img_size = self.height
 
-        self.read_class_list(self.class_lists)
+        # self.read_class_list(self.class_lists)
         if self.shuffle:
             self.shuffle_data(shuffle_all=True)
 

@@ -7,6 +7,7 @@ import scipy.misc
 import numpy as np
 from time import gmtime, strftime
 import cv2
+import imageio
 
 def get_image(image_path, image_size, is_crop=True, resize_w=64, is_grayscale = False):
     return transform(imread(image_path, is_grayscale), image_size, is_crop, resize_w)
@@ -43,7 +44,8 @@ def merge(images, size):
     return img
 
 def imsave(images, size, path):
-    return scipy.misc.imsave(path, merge(images, size))
+    # return scipy.misc.imsave(path, merge(images, size))
+    return imageio.imwrite(path, merge(images, size))
 
 def center_crop(x, crop_h, crop_w=None, resize_w=64):
     if crop_w is None:
