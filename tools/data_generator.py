@@ -14,10 +14,10 @@ class ImageDataGenerator:
                  scale_size=(64, 64), classes=5, mode='train'):
 
         # Init params
-        self.root_folder = '/new_disk2/wangzw/tangxu/CACD_cropped_400/'
+        self.root_folder = '../data/CACD/CACD2000_detec_and_align/'
         if mode == 'train':
             # self.file_folder = '/new_disk2/wangzw/tangxu/age_data/train_data/'
-            self.file_folder = 'images/train'
+            self.file_folder = '../data/CACD/CACD2000_detec_and_align/'
             self.class_lists = ['train_age_group_0.txt',
                                'train_age_group_1.txt',
                                'train_age_group_2.txt',
@@ -26,7 +26,7 @@ class ImageDataGenerator:
             self.pointer = [0, 0, 0, 0, 0]
         else:
             # self.file_folder = '/new_disk2/wangzw/tangxu/age_data/test_data/'
-            self.file_folder = 'images/test'
+            self.file_folder = '../data/CACD/CACD2000_detec_and_align/'
             self.class_lists = ['test_age_group_0.txt',
                                'test_age_group_1.txt',
                                'test_age_group_2.txt',
@@ -34,8 +34,7 @@ class ImageDataGenerator:
                                'test_age_group_4.txt']
             self.pointer = [0, 0, 0, 0, 0, 0]
 
-        # self.train_label_pair = '/home/wangzw/Face-Aging-with-Identity-Preserved-Conditional-Generative-Adversarial-Networks-master/tools' \
-                                '/train_label_pair.txt'
+        # self.train_label_pair = '/home/wangzw/Face-Aging-with-Identity-Preserved-Conditional-Generative-Adversarial-Networks-master/tools/train_label_pair.txt'
         self.train_label_pair = 'tools/train_label_pair.txt'
         self.true_labels = []
         self.false_labels = []

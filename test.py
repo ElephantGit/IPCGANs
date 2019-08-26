@@ -1,7 +1,7 @@
 import os.path
 import os
-# os.environ['CUDA_DEVICES_ORDER'] = "PCI_BUS_ID"
-# os.environ["CUDA_VISIBLE_DEVICES"] = '2'
+os.environ['CUDA_DEVICES_ORDER'] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 import numpy as np
 import tensorflow as tf
 import time
