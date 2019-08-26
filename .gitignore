@@ -2,3 +2,5 @@
 /checkpoints/*
 /data/*
 /pre_trained/*
+
+*.pyc
