@@ -1,6 +1,11 @@
-/age/*
-/checkpoints/*
-/data/*
-/pre_trained/*
+age/*
+checkpoints/*
+data/*
+pre_trained/*
+
 
 *.pyc
+*.jpg
+*.jpeg
+*.png
+*.gif
