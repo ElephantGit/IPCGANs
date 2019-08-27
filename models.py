@@ -245,8 +245,7 @@ class FaceAging(object):
 
         self.get_vars()
 
-        d_optim = tf.train.AdamOptimizer(self.learning_rate, beta1=0.5).minimize(self.d_loss,
-                                                                                 var_list=self.d_vars)
+        d_optim = tf.train.AdamOptimizer(self.learning_rate, beta1=0.5).minimize(self.d_loss, var_list=self.d_vars)
         train_ops = [d_optim] + self._extra_train_ops
         self.d_optim = tf.group(*train_ops)
 

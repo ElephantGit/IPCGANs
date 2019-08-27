@@ -14,10 +14,10 @@ class ImageDataGenerator:
                  scale_size=(64, 64), classes=5, mode='train'):
 
         # Init params
-        self.root_folder = '../data/CACD/CACD2000_detec_and_align/'
+        self.root_folder = 'data/CACD/CACD2000_detec_and_align/'
         if mode == 'train':
             # self.file_folder = '/new_disk2/wangzw/tangxu/age_data/train_data/'
-            self.file_folder = '../data/CACD/CACD2000_detec_and_align/'
+            self.file_folder = 'data/CACD/CACD2000_detec_and_align/'
             self.class_lists = ['train_age_group_0.txt',
                                'train_age_group_1.txt',
                                'train_age_group_2.txt',
@@ -26,7 +26,7 @@ class ImageDataGenerator:
             self.pointer = [0, 0, 0, 0, 0]
         else:
             # self.file_folder = '/new_disk2/wangzw/tangxu/age_data/test_data/'
-            self.file_folder = '../data/CACD/CACD2000_detec_and_align/'
+            self.file_folder = 'data/CACD/CACD2000_detec_and_align/'
             self.class_lists = ['test_age_group_0.txt',
                                'test_age_group_1.txt',
                                'test_age_group_2.txt',
@@ -53,7 +53,7 @@ class ImageDataGenerator:
         self.z_dim = z_dim
         self.img_size = self.height
 
-        # self.read_class_list(self.class_lists)
+        self.read_class_list(self.class_lists)
         if self.shuffle:
             self.shuffle_data(shuffle_all=True)
 

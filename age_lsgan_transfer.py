@@ -1,6 +1,6 @@
 import os.path
 import os
-os.environ['CUDA_DEVICES_ORDER'] = "PCI_BUS_ID"
+# os.environ['CUDA_DEVICES_ORDER'] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 import numpy as np
 import tensorflow as tf
@@ -34,8 +34,8 @@ flags.DEFINE_string("checkpoint_dir", None, "Directory name to save the checkpoi
 flags.DEFINE_string("source_checkpoint_dir", ' ', "Directory name to save the checkpoints")
 flags.DEFINE_string("sample_dir", None, "Directory name to save the sample images")
 flags.DEFINE_string("fea_layer_name", None, "which layer to use for fea_loss")
-flags.DEFINE_string("source_file", 'your training file', "source file path")
-flags.DEFINE_string("root_folder", 'CACD_cropped_400/', "folder that contains images")
+flags.DEFINE_string("source_file", 'data/CACD/CACD2000_detec_and_align/source_file.txt', "source file path")
+flags.DEFINE_string("root_folder", 'data/CACD/CACD2000_detec_and_align/', "folder that contains images")
 FLAGS = flags.FLAGS
 
 # How often to run a batch through the validation model.
@@ -68,8 +68,7 @@ def train():
 
         source_img_227, source_img_128, face_label = load_source_batch3(FLAGS.source_file, FLAGS.root_folder, FLAGS.batch_size)
 
-        model.train_age_lsgan_transfer(source_img_227, source_img_128, imgs, true_label_features_128,
-                                       true_label_features_64, false_label_features_64, FLAGS.fea_layer_name, age_label)
+        model.train_age_lsgan_transfer(source_img_227, source_img_128, imgs, true_label_features_128, true_label_features_64, false_label_features_64, FLAGS.fea_layer_name, age_label)
 
         ge_samples = model.generate_images(imgs, true_label_features_128, reuse=True, mode='train')
 
