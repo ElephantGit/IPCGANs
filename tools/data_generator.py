@@ -10,7 +10,7 @@ https://github.com/joelthchao/tensorflow-finetune-flickr-style/dataset.py
 
 
 class ImageDataGenerator:
-    def __init__(self, batch_size, height, width, z_dim, shuffle=True,
+    def __init__(self, batch_size, height, width, z_dim, root_folder, file_folder, shuffle=True,
                  scale_size=(64, 64), classes=5, mode='train'):
 
         # Init params

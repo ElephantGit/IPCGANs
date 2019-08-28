@@ -15,12 +15,12 @@ from data_generator import ImageDataGenerator
 flags = tf.app.flags
 
 flags.DEFINE_float("learning_rate", 0.001, "Learning rate")
-flags.DEFINE_integer("batch_size", 32, "The size of batch images")
+flags.DEFINE_integer("batch_size", 64, "The size of batch images")
 flags.DEFINE_integer("image_size", 128, "the size of the generated image")
 flags.DEFINE_integer("noise_dim", 256, "the length of the noise vector")
 flags.DEFINE_integer("feature_size", 128, "image size after stride 2 conv")
 flags.DEFINE_integer("age_groups", 5, "the number of different age groups")
-flags.DEFINE_integer('max_steps', 200000, 'Number of batches to run')
+flags.DEFINE_integer('max_steps', 500000, 'Number of batches to run')
 flags.DEFINE_string("alexnet_pretrained_model", "pre_trained/alexnet.model-292000",
                     "Directory name to save the checkpoints")
 flags.DEFINE_string("age_pretrained_model", "pre_trained/age_classifier.model-300000",
@@ -35,7 +35,8 @@ flags.DEFINE_string("source_checkpoint_dir", ' ', "Directory name to save the ch
 flags.DEFINE_string("sample_dir", None, "Directory name to save the sample images")
 flags.DEFINE_string("fea_layer_name", None, "which layer to use for fea_loss")
 flags.DEFINE_string("source_file", 'data/CACD/CACD2000_detec_and_align/source_file.txt', "source file path")
-flags.DEFINE_string("root_folder", 'data/CACD/CACD2000_detec_and_align/', "folder that contains images")
+flags.DEFINE_string("root_folder", None, "folder that contains images")
+flags.DEFINE_string("file_folder", None, "folder taht contains train and test images")
 FLAGS = flags.FLAGS
 
 # How often to run a batch through the validation model.
@@ -52,7 +53,7 @@ config.gpu_options.allow_growth = True
 
 # Initalize the data generator seperately for the training and validation set
 train_generator = ImageDataGenerator(batch_size=FLAGS.batch_size, height=FLAGS.feature_size, width=FLAGS.feature_size,
-                                     z_dim=FLAGS.noise_dim, scale_size=(FLAGS.image_size, FLAGS.image_size), mode='train')
+                                     z_dim=FLAGS.noise_dim, root_folder=FLAGS.root_folder, file_folder=FLAGS.file_folder, scale_size=(FLAGS.image_size, FLAGS.image_size), mode='train')
 def train():
     with tf.Graph().as_default():
         sess = tf.Session(config=config)
@@ -67,8 +68,8 @@ def train():
         age_label = tf.placeholder(tf.int32, [FLAGS.batch_size])
 
         source_img_227, source_img_128, face_label = load_source_batch3(FLAGS.source_file, FLAGS.root_folder, FLAGS.batch_size)
-        print('length of source_img_227 is : {}'.format(len(source_img_227)))
-        print('length of source_img_128 is : {}'.format(len(source_img_128)))
+        print('length of source_img_227 is : {}'.format(tf.shape(source_img_227)[0]))
+        print('length of source_img_128 is : {}'.format(tf.shape(source_img_128)[0]))
 
         model.train_age_lsgan_transfer(source_img_227, source_img_128, imgs, true_label_features_128, true_label_features_64, false_label_features_64, FLAGS.fea_layer_name, age_label)
 
