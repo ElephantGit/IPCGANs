@@ -15,7 +15,7 @@ from data_generator import ImageDataGenerator
 flags = tf.app.flags
 
 flags.DEFINE_float("learning_rate", 0.001, "Learning rate")
-flags.DEFINE_integer("batch_size", 64, "The size of batch images")
+flags.DEFINE_integer("batch_size", 32, "The size of batch images")
 flags.DEFINE_integer("image_size", 128, "the size of the generated image")
 flags.DEFINE_integer("noise_dim", 256, "the length of the noise vector")
 flags.DEFINE_integer("feature_size", 128, "image size after stride 2 conv")
@@ -68,9 +68,10 @@ def train():
         age_label = tf.placeholder(tf.int32, [FLAGS.batch_size])
 
         source_img_227, source_img_128, face_label = load_source_batch3(FLAGS.source_file, FLAGS.root_folder, FLAGS.batch_size)
-        print('length of source_img_227 is : {}'.format(tf.shape(source_img_227)[0]))
-        print('length of source_img_128 is : {}'.format(tf.shape(source_img_128)[0]))
-
+        print('length of source_img_227 is : {}'.format(source_img_227.get_shape()))
+        print('length of source_img_128 is : {}'.format(source_img_128.get_shape()))
+        
+        
         model.train_age_lsgan_transfer(source_img_227, source_img_128, imgs, true_label_features_128, true_label_features_64, false_label_features_64, FLAGS.fea_layer_name, age_label)
 
         ge_samples = model.generate_images(imgs, true_label_features_128, reuse=True, mode='train')
